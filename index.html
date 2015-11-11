@@ -1,24 +1,35 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="myApp">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
-	<link rel="stylesheet" href="">
+	<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
+	<script src="jquery.min.js"></script>
 	<script src="angular.min.js"></script>
+	<script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<script src="controller.js"></script>
 </head>
-<body>
+<body ng-controller="myController">
 
-<div>
-	First Name: <input type="text" ng-model="firstName"></span>
+<div id="filter">
+	<input ng-model="filterSearch" type="text">
 </div>
-<div>
-	Last Name: <input type="text" ng-model="lastName"></span>
+
+<div class="container">
+	<ul>
+		<li ng-repeat="person in students | filter: filterSearch | orderBy: 'name'">
+			<span class="col-md-8">{{person.name}}: {{person.desc}}</span>
+			<a class="btn btn-primary col-md-3" href="#" ng-click="removeStudent(person)">Remove</a>
+		</li>
+	</ul>
 </div>
-<br/>
+	<form ng-submit="addPerson()">
+		<input type="text" ng-model = "newName" placeholder="Name...">
+		<input type="text" ng-model = "newDesc" placeholder="Description...">
+		<input type="submit">
+	</form>
 
-Hello, {{firstName}} {{lastName}}
-
-	
 </body>
 </html>
